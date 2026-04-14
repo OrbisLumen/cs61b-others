@@ -2,6 +2,8 @@
 
 ## Linked Data Structures
 
+### Basic
+
 1. IntNode (Basic Structure)
 
     ```java
@@ -20,7 +22,8 @@
 
     - Using `Generics` to build list
 
-3. SLList (Singly Linked List) [(Here is the code)](./Blocks/SLList.md)
+### SLList (Singly Linked List)
+ [(Here is the code)](./Blocks/SLList.md)
    
     ```
     (sentinel)
@@ -28,11 +31,12 @@
     |   0    | --> |  item  | --> |  item  | --> |  item  | --> null
     +--------+     +--------+     +--------+     +--------+
     ```
-    - Promotions :
+ - Promotions :
       - `size`
       - `sentinel`
   
-4. DLList (Doubly Linked List) (Circular Sentinel)
+### DLList (Doubly Linked List)
+ (Circular Sentinel)
     
     ```
         +--------+      +--------+      +--------+      +--------+
@@ -42,10 +46,12 @@
             |_______________________________________________|
     ```
 
-    - Promotions :
+- Promotions :
        - `last` (quicker access)
 
-## Array (with java)
+## Array (java)
+
+### Basic
 
 1. Arrays are a special kind of object which consists of a **numbered** sequence of memory boxes.
 2. Array's length cannot be changed.
@@ -64,3 +70,6 @@
     ```python 
     b[2:5] = a[0:3] "Python"
     ```
+
+### Resizing Array 
+[(Here is the code)](./Blocks/AList.md)

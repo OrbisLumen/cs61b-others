@@ -197,6 +197,10 @@ static final TYPE NAME = value;
         }
     }
     ```
+- For arrays
+    ```java
+    Generic[] a = (Generic[]) new Object[size];
+    ```
 
 ## Loop Structure
 
