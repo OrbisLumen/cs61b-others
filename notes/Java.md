@@ -147,6 +147,16 @@
   - **Non-static inner class**: (can access outer instance fields)
   - **Static nested class**: (does not depend on the outer class) 
 
+### Instanceof
+```java
+o instanceof Dog aDog
+```
+- Checks to see if o's dynamic type is Dog (or one of its subtypes).
+- If no, returns false.
+- If yes, returns true and casts o into a variable of static type Dog called aDog.
+- Works correctly, even if o is null.
+
+
 
 ## Types
 
@@ -305,6 +315,38 @@ do {
     }
     ```
 
+
+## Testing
+
+**Google's Truth assertions library**
+
+### Truth Assertions
+
+1. A truth assertion takes the following format:
+```java
+assertThat(actual).isEqualTo(expected);
+```
+2. To add a message to the assertion, we can instead use:
+```java
+assertWithMessage("actual is not expected")
+    .that(actual)
+    .isEqualTo(expected);
+```
+3. We can use things other than isEqualTo, depending on the type of actual. For example, if actual is a List, we could do the following to check its contents without constructing a new List:
+```java
+assertThat(actualList)
+    .containsExactly(0, 1, 2, 3)
+    .inOrder();
+```
+4. If we had a List or other reference object, we could use:
+```java
+assertThat(actualList)
+    .containsExactlyElementsIn(expected)  // `expected` is a List
+    .inOrder();
+```
+5. Truth has many assertions, including isNull and isNotNull; and isTrue and isFalse for booleans.
+
+
 ## Inheritance
 
 ### Interface Inheritance
@@ -396,9 +438,9 @@ A module is said to be encapsulated if its implementation is completely hidden a
 
 Users do not now superclass's impletation and could code new method to break encapsulation
 
-### Comparables vs. Comparators
+## Comparables vs. Comparators
 
-#### Comparable (内部比较规则）
+### Comparable (内部比较规则）
 
 1. Definition
 ```java
@@ -419,21 +461,13 @@ public class Dog implements Comparable<Dog> {
     }
 }
 ```
-3. Usage
-```java
-Dog max = Maximizer.max(dog)
-```
-- works when :
-    ```java
-    T extends comparable<T>
-    ```
 
-4. Key Points 
+3. Key Points 
     - comparison logic is part of the class
     - Only `one` natural order
     - Type-safe (no casting)
   
-#### Comparator (外部比较规则)
+### Comparator (外部比较规则)
 
 1. Definition
 ```java
@@ -455,13 +489,111 @@ public class DogSizeComparator implements Comparator<Dog> {
 
 3. Usage
 ```java
-Comparator<Dog> sc = new DogSizeComparator();
-Dog max = Maximizer.max(dogs, sc);
+ComparatorName.compare(o1, o2);
 ```
+- Return negative integer when o1 < o2
+- Return zero when o1 = o2
+- Return positive integer when o1 > o2
 
 4. Key Points 
     - Comparison logic is separate from class
     - Can define multiple orderings
     - More flexible
 
+## Iterators
 
+### Iterable (可迭代对象)
+
+1. Definition  
+```java
+public interface Iterable<T> {
+    Iterator<T> iterator();
+}
+```
+- Represents a collection that can be iterated.
+- Provides a way to get an iterator.
+
+2. Example
+```java 
+public class AList<T> implements Iterable<T> {
+    public Iterator<T> iterator() {
+        return new AListIterator();
+    }
+}
+```
+
+3. Usage (for-each loop)
+```java
+for (int x : mylist) {
+    System.out.printIn(x);
+}
+```
+
+- Compiler translates to:
+```java
+Iterator<Integer> it = myList.iterator();
+while(it.hasNext()) {
+    int x = it.next();
+}
+```
+
+4. Key Points
+    - Enables for-each loop
+    - Only requirement: implement iterator()
+
+### Iterator (迭代器)
+
+1. Definition 
+```java
+public interface Iterator<T> {
+    boolean hasNext();
+    T next();
+}
+```
+- Represents the actual traversal logic
+- Moves through elements one by one
+
+2. Example
+
+```java
+private class AListIterator implements Iterator<T> {
+    private int index;
+
+    public boolean hasNext() {
+        return index < size;
+    }
+
+    public T next() {
+        T returnItem = items[index];
+        index++;
+        return returnItem;
+    }
+}
+```
+
+3. Key Points
+- hasNext() -> is there more?
+- next() -> get next item
+- Maintains iteration state
+
+## Object Methods
+
+**Since all the things in java implements object and the methods below are object's, you can directly override them in your class**
+
+### toString() 
+
+1. The toString() method provides a string representation of an object.
+    - System.out.printIn(Object x) calls x.toString()
+
+
+### equals()
+1. Definition 
+```java
+public class Object {
+    ...
+
+    public boolean equals(Object obj) {
+        return (this == obj);
+    }
+}
+``` 
