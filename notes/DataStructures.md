@@ -194,7 +194,8 @@ The improvement of WeightedQuickUnionDS, using path compression.
 3. Rooted Binary Tree
    - Every node has either 0, 1 or 2 children (subtrees).
 
-## Binary Search Trees
+
+## Binary Search Trees (BST)
 
 ### Definition
 A binary search tree is a rooted binary tree with the BST property.
@@ -206,3 +207,122 @@ A binary search tree is a rooted binary tree with the BST property.
 Ordering must be complete, transitive, and antisymmetric
 
 No duplicate keys allowed.
+
+### Asymptotics
+
+1. BST invariant
+    - left < node < right
+ 
+2. find / get
+    - compare and go left / right
+
+3. insert / put
+    - Same travarsal as find
+    - Create node at null
+
+4. delete
+    - 0 child -> return null
+    - 1 child -> return child
+    - 2 child 
+
+**Deletion with two Children (Hibbard)**
+- Find the leftmost node in the right subtree.
+- Replace the deleted node’s key with this successor’s key.
+- Then delete the successor node from the right subtree.
+
+### Completion
+[Here is the code](./Blocks/BSTmap.md)
+
+| find | insert | delete |
+|---|---|---|
+|$$O(h)$$|$$O(h)$$|$$O(h)$$|
+
+- worst case: $\varTheta(N)$ (skewed tree)
+- balanced: $\varTheta(log N)$
+
+## Tree Rotation
+
+### Definition
+Tree rotation is a local restructuring operation that:
+- changes the shape of a tree
+- preserves the BST property 
+
+Example - rotateRight(P)
+```
+
+        p                       G - P                       G
+       / \                     /  |  \                     / \ 
+      G   R                   C   K   R                   C   P
+     / \            ->       /   / \           ->        /   / \
+    C   K                   A   J   L                   A   K   R
+   /   / \                                                 / \
+  A   J   L                                               J   L
+
+```
+Using rotation to balance a tree paying $O(N)$ time.
+
+## B-Trees
+
+### Definition
+
+A B-Tree is a balanced multi-way search tree.
+- Each node can hava multiple keys + multiple children.
+- Designed to keep the tree shallow.
+  
+
+**Node structure**
+We call a node `x-node` with x children 
+```
+    [ key1 | key2 | key3 | ... ]
+    /      |      |      |     \
+ child   child  child  child  child
+ ```
+ - Keys are sorted.
+ - Children split ranges:
+   - left subtree < key1
+   - betweern key1 & key2
+   - ...
+   - right subtree > last key
+
+**Invariants**
+Operations = $O(\log N)$
+All leaves must be the same distance from the root.
+A non-leaf node with k items must have exactly k+1 item.
+
+### 2-3 Tree (L = 2)
+
+A node can have 1-2 keys and 0-3 subtrees
+
+1. search 
+   - Same idea as BST, just more branches
+
+2. insert
+    - case 1: insert into a 2-node (directly)
+    - case 2: insert into a 3-node (overflow) -> split
+
+**Split Rule**
+- middle key goes up
+- others become children
+
+### 2-3-4 Tree (L = 3)
+
+A node can have 1-3 keys and 0-4 subtrees
+
+## Left Leaning Red-Black Trees (LLRBs)
+
+### Definition
+A Left-Leaning Red-Black Tree (LLRB) is a binary search tree that simulates a 2-3 tree using red links, where all red links lean left.
+
+### Asymptotics
+- When inserting: Use a red link.
+- If there is a *right leaning "3-node"*, we have a **Left Leaning Violation**.
+  - Rotate left the appropriate node to fix.
+- If ther are two *consecutive left links*. we have a **Incorrect 4-Node Violation**.
+  - Rotate right the appropriate node to fix.
+- If there are any *nodes with two red children*, we have a **Temporary 4-Node**.
+  - Color flip the node to emulate the split operation.
+
+- Pay attention to `Cascading Balance`.(连锁反应)
+
+### Property
+**An LLRB has no more than ~2x the height of its 2-3 tree.**
