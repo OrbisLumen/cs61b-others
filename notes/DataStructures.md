@@ -80,7 +80,7 @@ Any single operation may take longer, but if we use it over many operations, we'
 - Promotions :
        - `last` (quicker access)
 
-## Array (java)
+## Array (Java)
 
 ### Basic
 1. Arrays are a special kind of object which consists of a **numbered** sequence of memory boxes.
@@ -226,7 +226,36 @@ Main operations:
   - HashMap
   - TreeMap
 
-## Priority Queue 
+## Priority Queue
+
+### Definition
+
+A Priority Queue is an ADT that supports adding items and quickly accessing/removing the item with the highest priority.
+
+In CS61B Lecture 21, we mainly discuss the **Min Priority Queue**, where the most important item is the smallest item.
+
+Main operations:
+- `add(x)`: adds item x to the priority queue
+- `getSmallest()`: returns the smallest item
+- `removeSmallest()`: removes and returns the smallest item
+- `size()`: returns the number of items
+
+### Priority Queue vs Heap
+
+- **Priority Queue** is an ADT: it describes what operations we want.
+- **Binary Min-Heap** is a concrete data structure: it describes how we implement the Priority Queue efficiently.
+
+### Completion
+
+Using **Binary Min-Heap**
+
+
+| add | getSmallest | removeSmallest |
+| --- | --- | --- |
+| $$\varTheta(\log N)$$ | $$O(1)$$ | $$\varTheta(\log N)$$ |
+
+
+
 
 # Trees
 
@@ -245,6 +274,77 @@ Main operations:
 3. Rooted Binary Tree
    - Every node has either 0, 1 or 2 children (subtrees).
 
+## Tree Representations (Java)
+
+### Explicit Child References
+
+Each node directly stores references to its children.
+
+#### Fixed-Width Nodes
+
+```java
+public class Tree1A<Key> {
+    Key key;
+    Tree1A<Key> left;
+    Tree1A<Key> middle;
+    Tree1A<Key> right;
+}
+```
+
+#### Variable-Width Nodes
+
+```java
+public class Tree1B<Key> {
+    Key key;
+    Tree1B<Key>[] children;
+}
+```
+
+#### First-Child Next-Sibling Representation
+
+```java
+public class Tree1C<Key> {
+    Key key;
+    Tree1C<Key> firstChild;
+    Tree1C<Key> nextSibling;
+}
+```
+
+### Array with Parent Links
+
+```java
+public class Tree2<Key> {
+    Key[] keys;
+    int[] parents;
+}
+```
+
+### Array Representation for Complete Trees
+
+For complete trees, store nodes in level order in an array.
+
+This is used for Binary Heaps.
+
+Usually index 0 is left empty.
+
+Example:
+```
+Index:  1  2  3  4  5  6  7
+Array: [A, B, C, D, E, F, G]
+```
+```
+        A
+      /   \
+     B     C
+    / \   / \
+   D   E F   G
+```
+
+```java
+leftChild(k) = 2 * k;
+rightChild(k) = 2 * k + 1;
+parent(k) = k / 2;
+``` 
 
 ## Binary Search Trees (BST)
 
