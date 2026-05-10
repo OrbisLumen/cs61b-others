@@ -105,6 +105,72 @@ Any single operation may take longer, but if we use it over many operations, we'
 (Resizing Array)
 [(Here is the code)](./Blocks/AList.md)
 
+## Stack
+
+### Definition
+
+Main operations:
+- `push`: addFirst
+- `pop`: removeFirst 
+
+## Queue
+
+### Definition
+
+Main opreations:
+- `enqueue`: addLast
+- `dequeue`: removeFirst
+
+
+## Set
+
+### Definition
+
+A Set is a collection of unique items.
+
+Main operations:
+- `add(x)`: add item x
+- `contains(x)`: check whether x exists
+- `remove(x)`: remove x
+- `size()`: return the number of items
+
+### Key Properties
+
+- No duplicate items.
+- Usually only stores keys, not values.
+- Common implementations:
+  - BSTSet
+  - HashSet
+  - TreeSet
+
+### Set vs List
+
+- List cares about order and index.
+- Set cares about membership: whether an item exists.
+
+## Map
+
+### Definition
+
+A Map stores key-value pairs.
+
+Main operations:
+- `put(key, value)`: insert or update a key-value pair
+- `get(key)`: get the value associated with the key
+- `containsKey(key)`: check whether the key exists
+- `remove(key)`: remove the key-value pair
+- `size()`: return the number of pairs
+
+### Key Properties
+
+- Keys are unique.
+- Values can be duplicated.
+- Each key maps to exactly one value.
+- Common implementations:
+  - BSTMap
+  - HashMap
+  - TreeMap
+
 ## Disjoint Sets (并查集)
 
 ### Basic
@@ -177,55 +243,6 @@ The improvement of WeightedQuickUnionDS, using path compression.
 
 **Weighted Quick Union with Path Compression has almost constant time operations.**
 
-## Set
-
-### Definition
-
-A Set is a collection of unique items.
-
-Main operations:
-- `add(x)`: add item x
-- `contains(x)`: check whether x exists
-- `remove(x)`: remove x
-- `size()`: return the number of items
-
-### Key Properties
-
-- No duplicate items.
-- Usually only stores keys, not values.
-- Common implementations:
-  - BSTSet
-  - HashSet
-  - TreeSet
-
-### Set vs List
-
-- List cares about order and index.
-- Set cares about membership: whether an item exists.
-
-## Map
-
-### Definition
-
-A Map stores key-value pairs.
-
-Main operations:
-- `put(key, value)`: insert or update a key-value pair
-- `get(key)`: get the value associated with the key
-- `containsKey(key)`: check whether the key exists
-- `remove(key)`: remove the key-value pair
-- `size()`: return the number of pairs
-
-### Key Properties
-
-- Keys are unique.
-- Values can be duplicated.
-- Each key maps to exactly one value.
-- Common implementations:
-  - BSTMap
-  - HashMap
-  - TreeMap
-
 ## Priority Queue
 
 ### Definition
@@ -274,7 +291,7 @@ Using **Binary Min-Heap**
 3. Rooted Binary Tree
    - Every node has either 0, 1 or 2 children (subtrees).
 
-## Tree Representations (Java)
+## Representations
 
 ### Explicit Child References
 
@@ -346,7 +363,7 @@ rightChild(k) = 2 * k + 1;
 parent(k) = k / 2;
 ``` 
 
-## Tree Traversal
+## Traversal
 
 ```
         A
@@ -549,3 +566,42 @@ Types: Directed/Undirected, Acyclic/Cyclic, With Edge Labels
   - A *simple path* is a path without repeated vertices
 - Cycle
 - Connected
+- Degree 
+  - = # edges
+
+## Representations
+
+### API
+```java
+public class Graph {
+    public Graph(int V):                // Create empty graph with v vertices
+    public void addEdge(int v, int w):  // add an edge v-w
+    Iterable<Integer> adj(int v):       // vertices adjacent to v
+    int V():                            // number of vertices
+    int E():                            // number of edges
+}
+```
+
+### Adjacency Matrix
+### Adjacency List
+
+## Traversal
+
+### DFS
+
+RunTime O(V + E)
+
+**DFS Preorder**: Action is before DFS calls to neighbors
+
+**DFS Postorder**: Action is after DFS calls to neighbors
+
+### BFS 
+
+- Initialize a queue with a starting vertex s anmd mark the vertex
+- Repeat until queue is empty:
+  - Remove vertex v from the front of the queue
+  - For each unmarked neighbor n of v
+    - Mark n
+    - Set edgeTo[n] = v (and distTo[n] = distTo[v] + 1)
+    - Add n to end of queue
+
