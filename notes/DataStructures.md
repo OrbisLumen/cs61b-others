@@ -614,6 +614,8 @@ RunTime O(V + E)
 
 ### Dijkstra's Algorithm
 
+*The graph has no negative weight edges.*
+
 Dijkstra repeatedly finalizes the closest unmarked vertex.
 
 1. Initialize:
@@ -629,4 +631,25 @@ Dijkstra repeatedly finalizes the closest unmarked vertex.
 3. Relaxation:
    - If going through `v` gives a shorter path to `w`, update `distTo[w]`, `edgeTo[w]`, and PQ priority.
 
+**Run Time** 
+
+$O(E \log V)$ for a connected graph.
+
+### A* Algorithm
+
+A* is like Dijkstra's algorithm, but the priority is `distTo[v] + heuristic(v, goal)`(distance + penalty), so it prefers vertices that are both cheap to reach and estimated to be closer to the goal.
+
 ## Minimum Spanning Trees
+
+### Definition
+
+**Spanning Tree**
+- a subgraph of an undirected graph, where it:
+  - is connected
+  - is acyclic
+  - includes all of the vertices
+
+A **minimum spanning tree** is a spanning tree of minimum total weight.
+
+### Prim's Algorithm
+
