@@ -109,6 +109,8 @@ Any single operation may take longer, but if we use it over many operations, we'
 
 ### Definition
 
+First in, last out
+
 Main operations:
 - `push`: addFirst
 - `pop`: removeFirst 
@@ -116,6 +118,8 @@ Main operations:
 ## Queue
 
 ### Definition
+
+First in, first out
 
 Main opreations:
 - `enqueue`: addLast
@@ -583,6 +587,7 @@ public class Graph {
 ```
 
 ### Adjacency Matrix
+
 ### Adjacency List
 
 ## Traversal
@@ -605,3 +610,23 @@ RunTime O(V + E)
     - Set edgeTo[n] = v (and distTo[n] = distTo[v] + 1)
     - Add n to end of queue
 
+## Shortest Paths
+
+### Dijkstra's Algorithm
+
+Dijkstra repeatedly finalizes the closest unmarked vertex.
+
+1. Initialize:
+   - `distTo[source] = 0`
+   - all other distances = infinity
+   - PQ ordered by `distTo`
+
+2. Repeat:
+   - Remove the closest unmarked vertex `v` from the PQ.
+   - Mark `v`.
+   - Relax all outgoing edges `v -> w` where `w` is unmarked.
+
+3. Relaxation:
+   - If going through `v` gives a shorter path to `w`, update `distTo[w]`, `edgeTo[w]`, and PQ priority.
+
+## Minimum Spanning Trees
