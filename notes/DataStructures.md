@@ -612,9 +612,11 @@ RunTime O(V + E)
 
 ## Shortest Paths
 
-### Dijkstra's Algorithm
-
 *The graph has no negative weight edges.*
+*The graph is Directed/Undirected.*
+*We choose a starting vertex.*
+
+### Dijkstra's Algorithm
 
 Dijkstra repeatedly finalizes the closest unmarked vertex.
 
@@ -641,6 +643,10 @@ A* is like Dijkstra's algorithm, but the priority is `distTo[v] + heuristic(v, g
 
 ## Minimum Spanning Trees
 
+*Negative weight edges are allowed.*
+*The graph is Undirected.*
+*We do not choose a starting vertex.*
+
 ### Definition
 
 **Spanning Tree**
@@ -653,3 +659,36 @@ A **minimum spanning tree** is a spanning tree of minimum total weight.
 
 ### Prim's Algorithm
 
+#### Basic Prim's
+
+Start from some arbitrary start node.
+- Repeatedly add shortest edge that has one node inside the MST under construction.
+- Repeat until V - 1 edges.
+
+#### Optimized Prim's
+
+- Insert all vertices into fringe PQ, storing vertices in order of `distance from tree`. 
+- Repeat: Remove (closest) vertex v from PQ, and relax all edges pointing from v.
+
+**Run Time** 
+
+$O(E \log V)$ for a connected graph.
+
+### Kruskal's Algorithm
+
+- Consider edges in order of increasing weight. (Using `PQ`)
+- Add to MST unless a cycle is created. (Using `Disjoint Set`)
+- Repeat until V - 1 edges
+
+**Run Time**
+
+$O(E \log E)$ for a connected graph.
+
+## Directed Acyclic Graphs
+
+**Topological ordering**
+- When nodes are sorted in diagram, arrows all point rightwards.
+
+Perform a DFS traversal from every vertex eith indegree 0, NOT clearing markings in between traverals.
+- Record DFS postorder in a list.
+- Topological ordering is givern by the reverse of that list (reverse postorder).
