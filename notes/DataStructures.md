@@ -659,19 +659,16 @@ A **minimum spanning tree** is a spanning tree of minimum total weight.
 
 ### Prim's Algorithm
 
-#### Basic Prim's
-
+**Basic Prim's**
 Start from some arbitrary start node.
 - Repeatedly add shortest edge that has one node inside the MST under construction.
 - Repeat until V - 1 edges.
 
-#### Optimized Prim's
-
+**Optimized Prim's**
 - Insert all vertices into fringe PQ, storing vertices in order of `distance from tree`. 
 - Repeat: Remove (closest) vertex v from PQ, and relax all edges pointing from v.
 
 **Run Time** 
-
 $O(E \log V)$ for a connected graph.
 
 ### Kruskal's Algorithm
@@ -681,14 +678,52 @@ $O(E \log V)$ for a connected graph.
 - Repeat until V - 1 edges
 
 **Run Time**
-
 $O(E \log E)$ for a connected graph.
 
 ## Directed Acyclic Graphs
 
-**Topological ordering**
+### Topological ordering
 - When nodes are sorted in diagram, arrows all point rightwards.
 
+**Topological sort**
 Perform a DFS traversal from every vertex eith indegree 0, NOT clearing markings in between traverals.
 - Record DFS postorder in a list.
 - Topological ordering is givern by the reverse of that list (reverse postorder).
+
+**Run Time**
+$O(V + E)$
+
+### DAG SPT Algorithm
+The Shortest Paths Problem on DAGs.
+
+Visit vertices in topological order.
+- When we vist a vertex: relax all of its going edges.
+
+**Run Time**
+$O(V + E)$
+
+### DAG LPT Algorithm
+The Longest Paths Problem on DAGs.
+
+DAG LPT solution for graph G:
+- Form a new copy of the graph G' with signs of all edge weights flipped.
+- Run DAGSPT on G' yielding result X.
+- Flip signs of all values in X.distTo.
+- X.edgeTo is already correct.
+
+**Run Time**
+$O(V + E)$
+
+# Trie
+
+## Definition
+Short for Retrieval Tree.
+
+For String keys:
+- Every node stores only one letter.
+- Nodes can be shared by multiple keys.
+- Mark at the end of the key.
+
+## Operations
+
+The main appeal of tries is their ability to efficiently support string specific operations like prefix matching.
