@@ -36,3 +36,19 @@ Using **max heap** to select max item.
 **Extra Space** $\Theta (N)$ for new heap, $\Theta (1)$ for in-place heap.
 
 ## Merge Sort
+
+Mergesort:
+- Split items into 2 roughly even pieces.
+- Mergesort each half. (Recursively)
+- Merge the two sorted halves to form the final result.
+
+**Run Time** $\Theta(N \log n)$
+**Extra Space** $\Theta(N)$
+
+## Insertion Sort
+
+Repeat for i = 0 to N - 1:
+- Designate item i as the traveling item.
+- Swap item backwards until traveller is in the right place among all previously examined items.
+
+**Run Time** $O (N^2)$
