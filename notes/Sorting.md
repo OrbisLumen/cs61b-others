@@ -10,7 +10,17 @@ A **sort** is a permutation (re-arrangement) of a sequence of elements that puts
 
 An **inversion** is a pair of elements that are out of order with respect to <.
 
-## Selection Sort
+## Comparison Sorts
+
+**Comparison sorts**:
+- Heapsort
+- Mergesort
+- Quicksort
+- Insertion Sort
+- Selection Sort
+- Bubble Sort
+ 
+### Selection Sort
 
 Selection sorting N items:
 - Find the smallest item in the unsorted portion of the array.
@@ -19,7 +29,7 @@ Selection sorting N items:
 
 **Run Time** $O(N^2)$
 
-## Heap Sort
+### Heap Sort
 
 Heap sort can be viewed as an optimized version of selection sort.
 Using **max heap** to select max item.
@@ -30,12 +40,12 @@ Using **max heap** to select max item.
   - Repeat N times:
     - Delete largest item from the max heap.
     - Swapping root with last item in the heap.
-    - Maintain the max heap.
+    - Maintain the max heap
 
 **Run Time** $O(N \log N)$
-**Extra Space** $\Theta (N)$ for new heap, $\Theta (1)$ for in-place heap.
+**Extra Memory** $\Theta (N)$ for new heap, $\Theta (1)$ for in-place heap.
 
-## Merge Sort
+### Merge Sort
 
 Mergesort:
 - Split items into 2 roughly even pieces.
@@ -43,12 +53,43 @@ Mergesort:
 - Merge the two sorted halves to form the final result.
 
 **Run Time** $\Theta(N \log n)$
-**Extra Space** $\Theta(N)$
+**Extra Memory** $\Theta(N)$
 
-## Insertion Sort
+### Insertion Sort
 
 Repeat for i = 0 to N - 1:
 - Designate item i as the traveling item.
 - Swap item backwards until traveller is in the right place among all previously examined items.
 
 **Run Time** $O (N^2)$
+
+### Quick Sort
+
+Quick sorting N items:
+- Partition on leftmost item.
+- Quicksort left half.
+- Quicksort right half.
+
+To partition an array a[] on element x = a[i] is to rearrange a[] so that:
+- x moves to position j (may be the same as i)
+- All entries to the left of x are <= x.
+- All entries to the right of x are >= x.
+
+**Run Time** 
+- Best case: $\Theta(N \log N)$
+- Worst case: $\Theta(N^2)$
+- Randomly chosen array case: $\Theta(N\log N)$ expected 
+
+**Extra Memory** $\Theta(\log N)$ (call stack)
+
+### Theoretical Bounds
+
+Any sort that uses comparisons has runtime $\Omega(N \log N)$.
+
+## Non-comparison Sorts
+
+**Non-comparison sorts**:
+- Radix Sort
+- Sleepsort
+- Gravity Sort
+- BOGOsort
